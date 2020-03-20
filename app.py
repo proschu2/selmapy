@@ -7,8 +7,8 @@ from selenium.webdriver.chrome.options import Options
 import psycopg2
 import os
 app = Flask(__name__)
-GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
-CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+GOOGLE_CHROME_PATH = os.environ['GOOGLE_CHROME_BIN'] if 'GOOGLE_CHROME_BIN' in os.environ else '/app/.apt/usr/bin/google-chrome'
+CHROMEDRIVER_PATH = os.environ['CHROMEDRIVER_PATH'] if 'CHROMEDRIVER_PATH' in os.environ else '/app/.chromedriver/bin/chromedriver'
 
 
 def selma():
