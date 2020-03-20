@@ -18,8 +18,7 @@ def selma():
     chrome_options.add_argument('--no-sandbox')
     chrome_options.binary_location = GOOGLE_CHROME_PATH
     chrome_options.add_argument("--headless")
-    driver = webdriver.Chrome(
-        execution_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+    driver = webdriver.Chrome(CHROMEDRIVER_PATH, chrome_options=chrome_options)
     driver.get('https://selma.io/login')
     e = driver.find_element(By.ID, 'user_email')
     print(e)
