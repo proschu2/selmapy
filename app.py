@@ -97,7 +97,7 @@ def add():
             return response
         else:
             print(f'they are different: {previous} vs {change}')
-            query = f'''INSERT INTO SELMA(date, amount, percentage, change) VALUES(now(), ${float(amount)}, ${float(perc)}, ${float(change)});'''
+            query = f'''INSERT INTO SELMA(date, amount, percentage, change) VALUES(now(), {int(amount)}, {float(perc)}, {float(change)});'''
             try:
                 cursor2 = connection.cursor()
                 cursor2.execute(query)
