@@ -87,6 +87,7 @@ def add():
         cursor = connection.cursor()
         cursor.execute('select change from selma order by id DESC limit 1')
         previous = cursor.fetchone()[0]
+        cursor.close()
         if float(previous) == float(change):
             print('no need to add as still the same change')
             response = app.response_class(
@@ -101,6 +102,9 @@ def add():
             try:
                 cursor2 = connection.cursor()
                 cursor2.execute(query)
+                connection.commit()
+                cursor2.close()
+                connection.close()
                 return app.response_class(
                     response="New row added",
                     status=200,
@@ -115,7 +119,7 @@ def add():
     except Exception as e:
         return app.response_class(
             response=f"Connection issues: {e}",
-            statsu=401,
+            status=401,
             mimetype='application/json'
         )
 
