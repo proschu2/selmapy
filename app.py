@@ -50,6 +50,7 @@ def selma():
     change = change.replace('CHF', '')
     change = change.replace(' ', '')
     change = change.replace("'", '')
+    change = change.replace('’', '')
     #print(f'change is {change}')
     e = driver.find_element(
         By.CSS_SELECTOR, 'span.change-figure.normal-weight')
