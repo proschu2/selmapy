@@ -110,39 +110,66 @@ time.sleep(5)
 driver.quit()
 
 # %%
+
+
 def add_details():
     try:
+        q_ = 'international_percentage, international_amount, international_change, swiss_percentage, swiss_amount, swiss_change, private_equity_percentage, private_equity_amount, private_equity_change, company_loans_percentage, company_loans_amount, company_loans_change, country_loans_percentage, country_loans_amount, country_loans_change, real_estate_percentage, real_estate_amount, real_estate_change, precious_metals_percentage, precious_metals_amount, precious_metals_change, cash_percentage, cash_amount'
+        ins = []
+        q_fin = []
+        for el in q_.split(', '):
+            f = el.split('_')
+            i, j = '_'.join(f[:-1]), f[-1]
+            if (i in data.keys()):
+                val = data[i][j]
+                ins.append(val)
+                q_fin.append(el)
+        q_fin += ['date', 'amount', 'change', 'perc']
+        ins += ['now()', data['stats']['amount'], data['stats']
+                ['change'], data['stats']['perc']]
+        query = f'''INSERT INTO basic({','.join(q_fin)}) VALUES({','.join(ins)});'''
+        print(query)
+        return
         connection = psycopg2.connect(os.environ['DATABASE_URL'])
         cursor = connection.cursor()
-        cursor.execute('select change from selma order by id DESC limit 1')
+        cursor.execute('select change from basic order by id DESC limit 1')
         previous = cursor.fetchone()[0]
         cursor.close()
         if float(previous) == float(change):
             print('no need to add as still the same change')
-            response = app.response_class(
-                response="No need to add: still the same",
-                status=200,
-                mimetype='application/json'
-            )
+            response = "No need to add: still the same"
             return response
         else:
             print(f'they are different: {previous} vs {change}')
-            query = f'''INSERT INTO SELMA(date, amount, percentage, change) VALUES(now(), {int(amount)}, {float(perc)}, {float(change)});'''
+            q_ = 'international_percentage, international_amount, international_change, swiss_percentage, swiss_amount, swiss_change, private_equity_percentage, private_equity_amount, private_equity_change, company_loans_percentage, company_loans_amount, company_loans_change, country_loans_percentage, country_loans_amount, country_loans_change, real_estate_percentage, real_estate_amount, real_estate_change, precious_metals_percentage, precious_metals_amount, precious_metals_change, cash_percentage, cash_amount'
+            ins = []
+            q_fin = []
+            for el in q_.split(', '):
+                f = el.split('_')
+                i, j = '_'.join(f[:-1]), f[-1]
+                if (i in data.keys()):
+                    val = data[i][j]
+                    ins.append(float(val))
+                    q_fin.append(el)
+            q_fin += ['date', 'amount', 'change', 'perc']
+            ins += ['now()', data['stats']['amount'], data['stats']
+                    ['change'], data['stats']['perc']]
+            query = f'''INSERT INTO basic({','.join(q_fin)}) VALUES({','.join(ins)});'''
+            print(query)
+            return
             try:
                 cursor2 = connection.cursor()
                 cursor2.execute(query)
                 connection.commit()
                 cursor2.close()
                 connection.close()
-                return app.response_class(
-                    response="New row added",
-                    status=200,
-                    mimetype='application/json'
-                )
+                return "New row added"
+            except Exception as e:
+                return f"Connection issues: {e}",
     except Exception as e:
-        return app.response_class(
-            response=f"Error: {e}",
-            status=400,
-            mimetype='application/json'
-        )
+        return f"Error: {e}"
 
+
+# %%
+
+# %%
