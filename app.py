@@ -28,10 +28,8 @@ def selma():
             '../chromedriver.exe', chrome_options=chrome_options)
     driver.get('https://selma.io/login')
     e = driver.find_element(By.ID, 'user_email')
-    print(e)
     e.send_keys(os.environ['EMAIL'])
     e = driver.find_element(By.ID, 'user_password')
-    print(e)
     e.send_keys(os.environ['PASSWORD'])
     e = driver.find_element(By.NAME, 'commit')
     e.send_keys(Keys.RETURN)
@@ -43,7 +41,6 @@ def selma():
     amount = amount.replace("'", '')
     amount = amount.replace('’', '')
     amount = amount.replace(' ', '')
-    #print(f'amount is {amount}')
     e = driver.find_element(By.CSS_SELECTOR, 'span.change-figure')
     change = e.text
     change = change.replace('+', '')
