@@ -47,7 +47,7 @@ def login(d):
     e.send_keys(Keys.RETURN)
 
 
-def get_amounts(d, close: bool):
+def get_amounts(d, close=False):
     '''
     Get the current amount, change, and change in percentage
     @param d: driver
