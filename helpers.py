@@ -47,7 +47,7 @@ def login(d):
     e.send_keys(Keys.RETURN)
 
 
-def get_amounts(d):
+def get_amounts(d, close: bool):
     '''
     Get the current amount, change, and change in percentage
     @param d: driver
@@ -64,6 +64,8 @@ def get_amounts(d):
         EC.element_to_be_clickable((
             By.CSS_SELECTOR, 'span.change-figure.normal-weight')))
     perc = p.text.replace('+', '').replace('%', '').replace(' ', '')
+    if close:
+        d.close()
     return [amount, perc, change]
 
 
@@ -74,8 +76,7 @@ def selma():
     driver = get_driver()
     login(driver)
     time.sleep(5)
-    driver.close()
-    return get_amounts(driver)
+    return get_amounts(driver, True)
 
 
 def get_connection():
