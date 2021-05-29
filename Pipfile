@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+autopep8 = "*"
+certifi = "*"
+chardet = "*"
+click = "*"
+gunicorn = "*"
+idna = "*"
+itsdangerous = "*"
+psycopg2-binary = "*"
+pycodestyle = "*"
+requests = "*"
+selenium = "*"
+urllib3 = "*"
+Flask = "*"
+Jinja2 = "*"
+MarkupSafe = "*"
+Werkzeug = "*"
+ipykernel = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"
