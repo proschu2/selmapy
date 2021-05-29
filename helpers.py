@@ -116,7 +116,7 @@ def add_amounts(a: str, c: str, p: str) -> Dict:
         else:
             query = f'''INSERT INTO SELMA(date, amount, percentage, change) VALUES(now(), {int(amount)}, {float(perc)}, {float(change)});'''
             try:
-                execute_query(c, query, False)
+                execute_query(connection, query, False)
                 connection.close()
                 return {'response': "New row added", 'status': 200}
             except Exception as e:
