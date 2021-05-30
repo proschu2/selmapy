@@ -1,11 +1,4 @@
-import time
-from selenium.webdriver.common.by import By
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from flask import Flask, request, jsonify
-from selenium.webdriver.chrome.options import Options
-import psycopg2
-import os
+from flask import Flask
 from helpers import add_basics, selma, add_amounts, execute_query, get_connection
 app = Flask(__name__)
 

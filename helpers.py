@@ -2,12 +2,11 @@ import time
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from flask import Flask, request, jsonify
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import psycopg2
-from typing import List, Dict
+from typing import Dict
 import os
 
 GOOGLE_CHROME_PATH = os.environ['GOOGLE_CHROME_BIN'] if 'GOOGLE_CHROME_BIN' in os.environ else '/app/.apt/usr/bin/google-chrome'
